@@ -156,7 +156,7 @@ class App extends Component {
         <Hello name={this.state.name} />
 
     <div className="master-login-section">
-        <form autoComplete="off" onSubmit={this.handleSubmit}>
+            <form autoComplete="off" onSubmit={this.handleSubmit}>
             <div className="master-form-group">
                 <input  type="text" name="firstName" value={fields.firstName} onChange={event => this.handleUserInput(event)}              placeholder="First Name" className={"master-input " + (errors.firstName ? 'master-input-error' : '')} />
                 <span className="text-danger">{errors.firstName}</span>
