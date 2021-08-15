@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
+import TextArea from './TextArea'
 
 class App extends Component {
   constructor() {
@@ -15,6 +16,7 @@ class App extends Component {
                 password: "",
                 gender: '',
                 address: "",
+                comment: ""
             },
             errors: {
                 firstName : '',
@@ -23,6 +25,7 @@ class App extends Component {
                 password: '',
                 gender: '',
                 address: "",
+                comment: ""
             }
     };
   }
@@ -83,6 +86,12 @@ class App extends Component {
                     return "gender is Required";
                 } else {
                     return "";
+                } 
+            case "comment":
+                if(!value) {
+                    return "comment is Required";
+                } else if(!value.match(/^[a-zA-z0-9" "\!\.\?\,\"]+$/g)) {
+                    return "The text area can only have letters and numbers, spacs, and the following charactes: !, ., ?, "
                 }
             default: {
                 return "";
@@ -122,7 +131,8 @@ class App extends Component {
             fields.password && 
             fields.address &&
             fields.lastName &&
-            fields.gender
+            fields.gender && 
+            fields.comment
             ) {
             const data = {
             firstName: fields.firstName,
@@ -130,7 +140,8 @@ class App extends Component {
             password: fields.password,
             lastName: fields.lastName,
             address: fields.address,
-            gender: fields.gender
+            gender: fields.gender,
+            comment: fields.comment
             };
             window.alert("subit success", JSON.stringify(data));
             console.log("----data----", data);
@@ -144,57 +155,68 @@ class App extends Component {
       <div>
         <Hello name={this.state.name} />
 
- <div className="master-login-section">
-                            <form autoComplete="off" onSubmit={this.handleSubmit}>
-                            <div className="master-form-group">
-                            <input  type="text" name="firstName" value={fields.firstName} onChange={event => this.handleUserInput(event)}              placeholder="First Name" className={"master-input " + (errors.firstName ? 'master-input-error' : '')} />
-                                <span className="text-danger">{errors.firstName}</span>
-                            </div>
+    <div className="master-login-section">
+        <form autoComplete="off" onSubmit={this.handleSubmit}>
+            <div className="master-form-group">
+                <input  type="text" name="firstName" value={fields.firstName} onChange={event => this.handleUserInput(event)}              placeholder="First Name" className={"master-input " + (errors.firstName ? 'master-input-error' : '')} />
+                <span className="text-danger">{errors.firstName}</span>
+            </div>
 
-                            <div className="master-form-group">
-                            <input  type="text" name="lastName" value={fields.lastName} onChange={event => this.handleUserInput(event)}              placeholder="Last Name" className={"master-input " + (errors.lastName ? 'master-input-error' : '')} />
-                                <span className="text-danger">{errors.lastName}</span>
-                            </div>
-                            <div className="master-form-group">
-                                <input type="text" placeholder="Enter email address" name="emailAddress" value={fields.emailAddress} onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.emailAddress ? 'master-input-error' : '')} />
-                                <span className="text-danger">{errors.emailAddress}</span>
-                            </div>
-                            <div className="master-form-group">
-                                <input type="text" 
-                                placeholder="Address" 
-                                name="address" 
-                                value={fields.address} 
-                                onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.address ? 'master-input-error' : '')} />
-                                <span className="text-danger">{errors.address}</span>
-                            </div>
+            <div className="master-form-group">
+                <input  type="text" name="lastName" value={fields.lastName} onChange={event => this.handleUserInput(event)}              placeholder="Last Name" className={"master-input " + (errors.lastName ? 'master-input-error' : '')} />
+                <span className="text-danger">{errors.lastName}</span>
+            </div>
+            <div className="master-form-group">
+                <input type="text" placeholder="Enter email address" name="emailAddress" value={fields.emailAddress} onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.emailAddress ? 'master-input-error' : '')} />
+                <span className="text-danger">{errors.emailAddress}</span>
+            </div>
+            <div className="master-form-group">
+                <input type="text" 
+                placeholder="Address" 
+                name="address" 
+                value={fields.address} 
+                onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.address ? 'master-input-error' : '')} />
+                <span className="text-danger">{errors.address}</span>
+            </div>
 
-                            <div className="master-form-group">
-                                <label htmlFor="gender">Gender</label>
-                                <select
-                                    id="gender"
-                                    name="gender"
-                                    value={fields.gender}
-                                    onChange={this.handleUserInput}
-                                    className={"master-input " + (errors.gender ? 'master-input-error' : '')} 
-                                >
-                                    <option value="">Please select your gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                                <span className="text-danger">{errors.gender}</span>
-                            </div>
+        <div className="master-form-group">
+            <label htmlFor="gender">Gender</label>
+            <select
+                id="gender"
+                name="gender"
+                value={fields.gender}
+                onChange={this.handleUserInput}
+                className={"master-input " + (errors.gender ? 'master-input-error' : '')} 
+            >
+                <option value="">Please select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <span className="text-danger">{errors.gender}</span>
+        </div>
 
 
-                            <div className="master-form-group">
-                                <input type="password" placeholder="Enter password" name="password" value={fields.password} onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.password ? 'master-input-error' : '')} />
-                                <span className="text-danger">{errors.password}</span>
-                            </div>
-
-                            <div className="master-form-group master-center">
-                                <button className="master-submit-btn">Register now</button>
-                            </div>
-                            </form>
-                        </div>
+        <div className="master-form-group">
+            <input type="password" placeholder="Enter password" name="password" value={fields.password} onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.password ? 'master-input-error' : '')} />
+            <span className="text-danger">{errors.password}</span>
+        </div>
+        
+        <TextArea 
+            className="commentControl master-form-group"
+            id="comment"
+            label="Sign Up Greetings"
+            name="comment"
+            value={fields.comment}
+            onChange={this.handleUserInput}
+            error={errors.comment}
+            errorTextArea={"master-input " + (errors.password ? 'master-input-error' : '')}
+           
+        />
+        <div className="master-form-group master-center">
+            <button className="master-submit-btn">Register now</button>
+        </div>
+        </form>
+    </div>
 
       </div>
     );

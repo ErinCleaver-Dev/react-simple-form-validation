@@ -126,3 +126,8 @@ input, select {
 }
 
 /* Dashboard */
+textarea {
+    width: 100%;
+    border: 1px solid #9EE3DE;
+    min-height: 200px;
+}
