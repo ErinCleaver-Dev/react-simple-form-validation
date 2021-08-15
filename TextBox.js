@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TextBox = ({type, name, value, changed, placeholder, className, error}) => {
+const TextBox = ({type, name, value, changed, placeholder, error}) => {
   return (
     <div className="master-form-group">
       <input  

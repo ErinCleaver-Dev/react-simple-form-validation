@@ -163,27 +163,37 @@ class App extends Component {
                  name="firstName"
                  value={fields.firstName}
                  placeholder="First Name"
-                 className={"master-input " + (errors.firstName ? 'master-input-error' : '')}
                  changed={event => this.handleUserInput(event)}
                  error={errors.firstName}
             />
      
-            <div className="master-form-group">
-                <input  type="text" name="lastName" value={fields.lastName} onChange={event => this.handleUserInput(event)}              placeholder="Last Name" className={"master-input " + (errors.lastName ? 'master-input-error' : '')} />
-                <span className="text-danger">{errors.lastName}</span>
-            </div>
-            <div className="master-form-group">
-                <input type="text" placeholder="Enter email address" name="emailAddress" value={fields.emailAddress} onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.emailAddress ? 'master-input-error' : '')} />
-                <span className="text-danger">{errors.emailAddress}</span>
-            </div>
-            <div className="master-form-group">
-                <input type="text" 
-                placeholder="Address" 
-                name="address" 
-                value={fields.address} 
-                onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.address ? 'master-input-error' : '')} />
-                <span className="text-danger">{errors.address}</span>
-            </div>
+            <TextBox
+                 type="text"
+                 name="lastName"
+                 value={fields.lastName}
+                 placeholder="Last Name"
+                 changed={event => this.handleUserInput(event)}
+                 error={errors.lastName}
+            />
+
+            <TextBox
+                 type="text"
+                 name="emailAddress"
+                 value={fields.emailAddress}
+                 placeholder="Enter email address" 
+                 changed={event => this.handleUserInput(event)}
+                 error={errors.emailAddress}
+            />
+
+            
+            <TextBox
+                 type="text"
+                 name="address"
+                 value={fields.address}
+                 placeholder="Address" 
+                 changed={event => this.handleUserInput(event)}
+                 error={errors.address}
+            />
 
         <div className="master-form-group">
             <label htmlFor="gender">Gender</label>
@@ -201,11 +211,14 @@ class App extends Component {
             <span className="text-danger">{errors.gender}</span>
         </div>
 
-
-        <div className="master-form-group">
-            <input type="password" placeholder="Enter password" name="password" value={fields.password} onChange={event => this.handleUserInput(event)} className={"master-input " + (errors.password ? 'master-input-error' : '')} />
-            <span className="text-danger">{errors.password}</span>
-        </div>
+        <TextBox
+            type="password"
+            name="password"
+            value={fields.password}
+            placeholder="Enter password"
+            changed={event => this.handleUserInput(event)}
+            error={errors.password}
+        />
         
         <TextArea 
             className="commentControl master-form-group"
