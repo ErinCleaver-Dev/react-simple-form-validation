@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 import TextArea from './TextArea'
+import TextBox from './TextBox'
 
 class App extends Component {
   constructor() {
@@ -157,11 +158,16 @@ class App extends Component {
 
     <div className="master-login-section">
             <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <div className="master-form-group">
-                <input  type="text" name="firstName" value={fields.firstName} onChange={event => this.handleUserInput(event)}              placeholder="First Name" className={"master-input " + (errors.firstName ? 'master-input-error' : '')} />
-                <span className="text-danger">{errors.firstName}</span>
-            </div>
-
+            <TextBox
+                 type="text"
+                 name="firstName"
+                 value={fields.firstName}
+                 placeholder="First Name"
+                 className={"master-input " + (errors.firstName ? 'master-input-error' : '')}
+                 changed={event => this.handleUserInput(event)}
+                 error={errors.firstName}
+            />
+     
             <div className="master-form-group">
                 <input  type="text" name="lastName" value={fields.lastName} onChange={event => this.handleUserInput(event)}              placeholder="Last Name" className={"master-input " + (errors.lastName ? 'master-input-error' : '')} />
                 <span className="text-danger">{errors.lastName}</span>
